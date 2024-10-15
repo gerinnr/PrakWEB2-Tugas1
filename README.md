@@ -264,6 +264,7 @@ echo $dosen->tampilkanDosen();
 
 ## JobSheet 2
 
+
 ### Instruksi Kerja
 
 **1. Pembuatan Class dan Object**<br>
@@ -518,5 +519,205 @@ class Dosen extends Pengguna {
     }
 }
 ```
-Mendefinisikan class Dosen yang mewarisi class Pengguna dengan menggunakan keyword extends. Selanjutnya, menambahkan atribut $mataKuliah dalam class Dosen yang bersifat private. Hal ini berarti bahwa atribut tersebut hanya dapat diakses dan dimodifikasi dari dalam class Dosen itu sendiri. 
+Mendefinisikan class Dosen yang mewarisi class Pengguna dengan menggunakan keyword extends. Selanjutnya, menambahkan atribut $mataKuliah dalam class Dosen yang bersifat private. Hal ini berarti bahwa atribut tersebut hanya dapat diakses dan dimodifikasi dari dalam class Dosen itu sendiri. Mendefinisikan constructor untuk class Dosen, memanggil dari class Pengguna menggunakan `parent::__construct`. Selanjutnya, menambahkan metode getter untuk mengambil nilai atribut dan juga menambahkan metode setter untuk memperbarui nilai atribut `$mataKuliah`.
    - Instansiasi objek dari class Dosen dan tampilkan data dosen.
+```php
+//instansiasi objek dari class Dosen 
+$dosen = new Dosen("Andi Prasetyo", "Matematika");
+//menampilkan data Dosen menggunakan metode getter
+echo "Nama Dosen: " . $dosen->getNama() . "<br>";
+echo "Mata Kuliah: " . $dosen->getMataKuliah(); 
+```
+Dalam bagian ini, kita menginstansiasi objek dari class Dosen dengan memberikan nama "Andi Prasetyo" dan mata kuliah "Matematika" melalui constructor. Proses ini akan menginisialisasi atribut $nama dengan memanggil constructor class Pengguna, dan menetapkan nilai untuk atribut $mataKuliah. Setelah objek $dosen dibuat, kita menggunakan metode getter untuk menampilkan informasi dosen, memanggil getNama() untuk mengambil dan mencetak nama dosen, dan getMataKuliah() untuk menampilkan mata kuliah yang diajarkan. Dengan demikian, kita berhasil menampilkan data dosen secara terstruktur, sekaligus menerapkan prinsip enkapsulasi dengan melindungi akses langsung ke atribut internal objek.
+
+**Full Code** :
+```php
+<?php
+//definisi class Pengguna
+class Pengguna {
+    //atribut nama bersifat protected, hanya bisa diakses oleh class turunannya
+    protected $nama;
+    //construct untuk class Pengguna
+    public function __construct($nama) {
+        $this->nama = $nama;
+    }
+    //metode getter untuk mengambil nilai dari atribut $nama
+    public function getNama() {
+        return $this->nama;
+    }
+}
+//definisi class Dosen yang mewarisi class Pengguna
+class Dosen extends Pengguna {
+    //atribut mata kuliah bersifat private, bisa diakses hanya dari dalam class Dosen
+    private $mataKuliah;
+
+    //construct untuk class Dosen, menerima parameter $nama dan $mataKuliah
+    //constructor ini memanggil construct dari class Pengguna 
+    public function __construct($nama, $mataKuliah) {
+        parent::__construct($nama);//memanggil construct kelas pengguna
+        $this->mataKuliah = $mataKuliah;
+    }
+    //metode getter untuk mengambil nilai atribut $mataKuliah
+    public function getMataKuliah() {
+        return $this->mataKuliah;
+    }
+    //metode setter untuk mengubah nilai atribut $mataKuliah
+    public function setMataKuliah($mataKuliah) {
+        $this->mataKuliah = $mataKuliah;
+    }
+}
+//instansiasi objek dari class Dosen 
+$dosen = new Dosen("Andi Prasetyo", "Matematika");
+//menampilkan data Dosen menggunakan metode getter
+echo "Nama Dosen: " . $dosen->getNama() . "<br>";
+echo "Mata Kuliah: " . $dosen->getMataKuliah(); 
+?>
+```
+
+**Output** :<br>
+<img width="473" alt="image" src="https://github.com/user-attachments/assets/172e493d-5f1b-43ac-b7e8-96153baf4796">
+
+
+**4. Polymorphism**<br>
+   Polymorphism memungkinkan satu metode untuk memiliki banyak bentuk, 
+biasanya melalui metode overriding di kelas turunan. Dengan ini, objek dapat diperlakukan sebagai bentuk umum dan khusus sesuai kebutuhan.
+
+- Membuat class Pengguna dengan metode aksesFitur().
+```php
+<?php
+//definisi class Pengguna, merepresentasikan pengguna umum dalam sistem
+class Pengguna {
+    //atribut protected, hanya bisa diakses oleh kelas ini dan kelas turunannya
+    protected $nama;
+    //construct menginisialisasi objek
+    public function __construct($nama) {
+        $this->nama = $nama;
+    }
+    //metode aksesFitur untuk memberikan informasi pengguna
+    public function aksesFitur() {
+        return "Pengguna " . $this->nama . " memiliki akses fitur sebagai Anonim. ";
+    }
+}
+```
+Mendefinisikan class Pengguna yang berfungsi untuk merepresentasikan data pengguna. Menetapkan atribut $nama dengan akses modifier protected yang berarti atribut ini hanya bisa diakses oleh class Pengguna sendiri dan class yang mewarisinya.
+
+Melalui konstruktor __construct(), objek kelas dapat diinisialisasi dengan nama pengguna. Metode aksesFitur() mengembalikan sebuah string yang memberikan informasi tentang akses pengguna, menyatakan bahwa pengguna tersebut memiliki akses fitur sebagai Anonim. Dengan demikian, kelas ini berfungsi untuk menampung informasi dasar tentang pengguna dan memberikan deskripsi terkait fitur yang dapat diaksesnya.
+
+
+- Implementasikan aksesFitur() dengan cara berbeda di class Dosen dan 
+Mahasiswa.
+```php
+//definisi class Dosen yang mewarisi class Pengguna
+class Dosen extends Pengguna {
+    //atribut mata kuliah bersifat private, bisa diakses hanya dari dalam class Dosen
+    private $mataKuliah;
+
+    //construct untuk class Dosen, menerima parameter $nama dan $mataKuliah
+    //constructor ini memanggil construct dari class Pengguna 
+    public function __construct($nama, $mataKuliah) {
+        parent::__construct($nama);//memanggil construct kelas pengguna untuk menginisalisasi nama
+        $this->mataKuliah = $mataKuliah;
+    }
+    //metode untuk mengakses fitur khusus Dosen
+    public function aksesFitur(){
+        return "Dosen " . $this->nama . " bertanggung jawab untuk membimbing mahasiswa dalam mata kuliah " . $this->mataKuliah . ".";
+    }
+    }
+//definisi class Mahasiswa yang mewarisi class Pengguna
+class Mahasiswa extends Pengguna {
+    //atribut nim dan jurusan bersifat private, bisa diakses hanya dari dalam class Mahasiswa
+    private $nim;
+    private $jurusan;
+
+    //construct untuk class Mahasiswa, menerima parameter $nama, $nim, $jurusan
+    public function __construct($nama, $nim, $jurusan) {
+        parent::__construct($nama);//memanggil construct kelas pengguna untuk menginisalisasi nama
+        $this->nim = $nim;
+        $this->jurusan = $jurusan;
+    }
+    //metode untuk mengakses fitur khusus Mahasiswa
+    public function aksesFitur() {
+        return "Mahasiswa " . $this->nama . " dengan NIM " . $this->nim . " bertanggung jawab untuk menyelesaikan tugas yang diberikan oleh dosen.";
+    }
+}
+```
+Mengimplementasikan dua kelas turunan, Dosen dan Mahasiswa, yang mewarisi dari kelas Pengguna. Kelas Dosen memiliki atribut private $mataKuliah, yang hanya dapat diakses dari dalam kelas itu sendiri. Konstruktor kelas ini menerima parameter $nama dan $mataKuliah, dan memanggil konstruktor kelas induk untuk menginisialisasi nama pengguna. Metode aksesFitur() di kelas Dosen memberikan informasi khusus, menyatakan bahwa dosen bertanggung jawab membimbing mahasiswa dalam mata kuliah tertentu. Di sisi lain, kelas Mahasiswa memiliki dua atribut private, $nim dan $jurusan, dengan konstruktor yang menerima ketiga parameter: $nama, $nim, dan $jurusan, serta memanggil konstruktor kelas induk untuk inisialisasi. Metode aksesFitur() di kelas ini memberikan informasi bahwa mahasiswa bertanggung jawab menyelesaikan tugas yang diberikan oleh dosen. Dengan demikian, kedua kelas ini mendemonstrasikan bagaimana fitur akses dapat diimplementasikan secara berbeda berdasarkan peran pengguna dalam sistem pendidikan.
+
+
+- Instansiasi objek dari class Dosen dan Mahasiswa, lalu panggil metode 
+aksesFitur().
+```php
+/instansiasi objek dari class Dosen
+$dosen = new Dosen("Andi Prasetyo", "Matematika");
+//memanggil metode aksesFitur pada objek Dosen dan mencetak outputnya
+echo $dosen->aksesFitur();
+echo "<br><br>";
+//instansiasi objek dari class Mahasiswa
+$mahasiswa = new Mahasiswa("Gerin Nurul", "230202061", "Teknik Informatika");
+//memanggil metode aksesFitur pada objek Mahasiswa dan mencetak outputnya
+echo $mahasiswa->aksesFitur();
+?>
+Melakukan instansiasi objek dari kelas Dosen dan Mahasiswa, serta memanggil metode aksesFitur() untuk masing-masing objek. Objek Dosen diciptakan dengan nama "Andi Prasetyo" dan mata kuliah "Matematika". Setelah itu, metode aksesFitur() dipanggil, yang mencetak informasi bahwa dosen tersebut bertanggung jawab membimbing mahasiswa dalam mata kuliah yang disebutkan. Selanjutnya, objek Mahasiswa diinstansiasi dengan nama "Gerin Nurul", NIM "230202061", dan jurusan "Teknik Informatika". Metode aksesFitur() juga dipanggil untuk objek mahasiswa, yang menghasilkan informasi bahwa mahasiswa tersebut bertanggung jawab untuk menyelesaikan tugas yang diberikan oleh dosen. Dengan demikian, script ini menunjukkan bagaimana masing-masing pengguna dapat memiliki informasi dan akses fitur yang berbeda berdasarkan peran mereka dalam sistem.
+```
+
+**Full Code** :
+```php
+<?php
+//definisi class Pengguna, merepresentasikan pengguna umum dalam sistem
+class Pengguna {
+    //atribut protected, hanya bisa diakses oleh kelas ini dan kelas turunannya
+    protected $nama;
+    //construct menginisialisasi objek
+    public function __construct($nama) {
+        $this->nama = $nama;
+    }
+    //metode aksesFitur untuk memberikan informasi pengguna
+    public function aksesFitur() {
+        return "Pengguna " . $this->nama . " memiliki akses fitur sebagai Anonim. ";
+    }
+}
+
+//definisi class Dosen yang mewarisi class Pengguna
+class Dosen extends Pengguna {
+    //atribut mata kuliah bersifat private, bisa diakses hanya dari dalam class Dosen
+    private $mataKuliah;
+
+    //construct untuk class Dosen, menerima parameter $nama dan $mataKuliah
+    //constructor ini memanggil construct dari class Pengguna 
+    public function __construct($nama, $mataKuliah) {
+        parent::__construct($nama);//memanggil construct kelas pengguna untuk menginisalisasi nama
+        $this->mataKuliah = $mataKuliah;
+    }
+    //metode untuk mengakses fitur khusus Dosen
+    public function aksesFitur(){
+        return "Dosen " . $this->nama . " bertanggung jawab untuk membimbing mahasiswa dalam mata kuliah " . $this->mataKuliah . ".";
+    }
+    }
+//definisi class Mahasiswa yang mewarisi class Pengguna
+class Mahasiswa extends Pengguna {
+    //atribut nim dan jurusan bersifat private, bisa diakses hanya dari dalam class Mahasiswa
+    private $nim;
+    private $jurusan;
+
+    //construct untuk class Mahasiswa, menerima parameter $nama, $nim, $jurusan
+    public function __construct($nama, $nim, $jurusan) {
+        parent::__construct($nama);//memanggil construct kelas pengguna untuk menginisalisasi nama
+        $this->nim = $nim;
+        $this->jurusan = $jurusan;
+    }
+    //metode untuk mengakses fitur khusus Mahasiswa
+    public function aksesFitur() {
+        return "Mahasiswa " . $this->nama . " dengan NIM " . $this->nim . " bertanggung jawab untuk menyelesaikan tugas yang diberikan oleh dosen.";
+    }
+}
+//instansiasi objek dari class Dosen
+$dosen = new Dosen("Andi Prasetyo", "Matematika");
+//memanggil metode aksesFitur pada objek Dosen dan mencetak outputnya
+echo $dosen->aksesFitur();
+echo "<br><br>";
+//instansiasi objek dari class Mahasiswa
+$mahasiswa = new Mahasiswa("Gerin Nurul", "230202061", "Teknik Informatika");
+//memanggil metode aksesFitur pada objek Mahasiswa dan mencetak outputnya
+echo $mahasiswa->aksesFitur();
+?>
+```
