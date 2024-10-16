@@ -134,7 +134,7 @@ $mahasiswa->updateJurusan("Komputer dan Bisnis");
 echo $mahasiswa->tampilkanData();
 ?>
 ```
- **Langkah-langkah Membuat Class**
+ **Langkah-langkah Membuat Class**<br>
 Mendeklarasikan kelas `Mahasiswa`, yang berfungsi sebagai blueprint untuk objek mahasiswa. Kelas ini kemudian didefinisikan dengan tiga properti publik, yaitu `nama`, `nim`, dan `jurusan`, yang akan menyimpan data setiap mahasiswa. Selanjutnya, konstruktor `__construct` dibuat untuk menginisialisasi properti-properti tersebut saat objek diinstansiasi. Setelah itu, metode `tampilkanData` ditambahkan, yang mengembalikan sebuah string berisi informasi lengkap mengenai mahasiswa. Kelas ini juga mencakup metode `updateJurusan()`, yang menerima satu parameter untuk memperbarui nilai dari properti jurusan. Setelah semua komponen kelas didefinisikan, objek baru dari kelas `Mahasiswa` diinstansiasi dengan memberikan nilai untuk `nama`, `nim`, dan `jurusan`. Metode `tampilkanData()` kemudian dipanggil untuk menampilkan informasi awal tentang mahasiswa. Selanjutnya, metode `updateJurusan()` digunakan untuk mengubah jurusan mahasiswa sesuai dengan kebutuhan. Terakhir, metode `tampilkanData()` dipanggil kembali untuk menampilkan informasi mahasiswa setelah jurusan diperbarui, sehingga memungkinkan untuk melihat perubahan yang telah dilakukan.
 
  **Output** : <br>
@@ -190,7 +190,7 @@ echo $mahasiswa->tampilkanData();
 ?>
 ```
 
- **Langkah-langkah Membuat Class**
+ **Langkah-langkah Membuat Class**<br>
 Mendeklarasikan kelas `Mahasiswa`, yang berfungsi sebagai blueprint untuk objek mahasiswa. Kelas ini didefinisikan dengan tiga properti publik: `nama`, `nim`, dan `jurusan`, yang akan menyimpan data setiap mahasiswa. Selanjutnya, dibuatlah konstruktor `__construct` yang dipanggil saat objek diinstansiasi untuk menginisialisasi ketiga properti tersebut. Kemudian, metode `tampilkanData()` ditambahkan, yang mengembalikan sebuah string berisi informasi lengkap mengenai mahasiswa. Selain itu, metode `updateJurusan()` dibuat untuk menerima satu parameter guna memperbarui nilai dari properti `jurusan`, serta metode setter `setNim()` untuk mengubah nilai properti `nim` setelah objek diinstansiasi. Setelah mendefinisikan kelas dan metode, objek baru dari kelas `Mahasiswa` diinstansiasi dengan memberikan nilai untuk `nama`, `nim`, dan `jurusan`. Metode `tampilkanData()` kemudian dipanggil untuk menampilkan informasi awal tentang mahasiswa. Selanjutnya, metode `updateJurusan()` digunakan untuk mengubah jurusan mahasiswa sesuai kebutuhan, diikuti dengan pemanggilan metode setter `setNim()` untuk mengubah NIM mahasiswa. Terakhir, metode `tampilkanData()` dipanggil kembali untuk menampilkan informasi mahasiswa setelah NIM diperbarui, sehingga perubahan yang dilakukan dapat terlihat dengan jelas.
 
 **Output** : <br>
