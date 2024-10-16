@@ -19,7 +19,7 @@ class Person {
 }
 //definisi class Student yang merupakan turunan dari class Person
 class Student extends Person {
-    //mendeklarasikan atribut dengan akses public, sehingga dapat diakses dari luar class
+    //mendeklarasikan atribut dengan akses private, sehingga dapat diakses dari luar class
     private $studentID;
 
     //construct untuk class Student, menerima parameter $nama dan $studentID
