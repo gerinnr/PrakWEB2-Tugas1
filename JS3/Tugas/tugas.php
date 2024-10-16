@@ -1,9 +1,9 @@
 <?php
-//definisi class Pengguna
+//definisi class Person
 class Person {
     //atribut nama bersifat protected, hanya bisa diakses oleh class turunannya
     protected $nama;
-    //construct untuk class Pengguna
+    //construct untuk class Person
     public function __construct($nama) {
         $this->nama = $nama;
     }
@@ -15,16 +15,16 @@ class Person {
         return "Anonim";
     }
 }
-//definisi class Dosen yang mewarisi class Pengguna
+//definisi class Dosen yang mewarisi class Person
 class Dosen extends Person {
     //atribut mata kuliah bersifat private, bisa diakses hanya dari dalam class Dosen
     private $nidn;
     private $mataKuliah;
 
     //construct untuk class Dosen, menerima parameter $nama dan $mataKuliah
-    //constructor ini memanggil construct dari class Pengguna 
+    //constructor ini memanggil construct dari class Person 
     public function __construct($nama, $nidn, $mataKuliah) {
-        parent::__construct($nama);//memanggil construct kelas pengguna
+        parent::__construct($nama);//memanggil construct kelas person
         $this->nidn = $nidn;
         $this->mataKuliah = $mataKuliah;
     }
@@ -56,7 +56,7 @@ class Mahasiswa extends Person {
 
     //construct untuk class Mahasiswa, menerima parameter $nama, $nim, $jurusan
     public function __construct($nama, $nim, $jurusan) {
-        parent::__construct($nama);//memanggil construct kelas pengguna untuk menginisalisasi nama
+        parent::__construct($nama);//memanggil construct kelas person untuk menginisalisasi nama
         $this->nim = $nim;
         $this->jurusan = $jurusan;
     }
